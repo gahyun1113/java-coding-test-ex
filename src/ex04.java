@@ -5,31 +5,23 @@ public class ex04 {
     static class Solution {
         public int[] solution(int[] arr, int[][] queries) {
             int[] answer = new int[queries.length];
+            int s=0;
+            int e=0;
+            int k=0;
+            int min = 0;
 
+            for(int i = 0; i<queries.length; i++) {
+                s=queries[i][0];
+                e=queries[i][1];
+                k=queries[i][2];
 
-            for(int i =0; i<queries.length ; i++) {
+                //arr 돌면서 k보다 큰값중 가장 작은 값을 찾는다
+                min = -1;
 
-                answer[i] = -1;
-
-                //쿼리에서 가장 큰 값을 찾는다.
-                int max = queries[i][0];
-                if(queries[i][1] > queries[i][0]) max = queries[i][1];
-                else if(queries[i][2] > max) max = queries[i][2];
-
-                //max값보다는 크면서 가장 작은 값을 arr 에서 구한다.
-
-                int min = 0;
-
-                for(int j=0; j<arr.length; j++) {
-
-                    if(arr[j] >= max && (arr[j] < arr[j+1]) ) min = arr[j];
-
+                for(int j=s; j<=e; j++) {
+                    if(arr[j]>k && min>arr[j]) min=arr[j];
                 }
-
                 answer[i] = min;
-
-
-
             }
             return answer;
         }
